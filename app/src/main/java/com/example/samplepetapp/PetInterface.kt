@@ -14,8 +14,14 @@ interface PetInterface {
 
     @GET("users")
 //    suspend fun getPets(): Response<PetList>
-    suspend fun getPets(): History
-//    suspend fun getPets(): List<Pets>
-//    suspend fun getPets(token: String): List<Pets>
+    suspend fun getPets(): Users
+
+    @Headers(
+        "Content-Type: application/json",
+        "Authorization: Bearer 540c0771-11fc-47e1-9c3f-f3824097bb4e"
+    )
+
+    @GET("users/me/loginHistory")
+    suspend fun getHistory(): History
 
 }

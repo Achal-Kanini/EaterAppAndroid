@@ -27,14 +27,14 @@ class InterestActivity : AppCompatActivity() {
         val petsApplication = application as PetsApplication
         val petService = petsApplication.pets
 
-        val newpets= emptyList<TimeStamps>()
+        val newpets= emptyList<User>()
         CoroutineScope(Dispatchers.IO).launch {
 //            val decodedpetsInterests = petService.getPetInterests()
-            val decodedpets = petService.getPets()
+            val decodedpets = petService.getHistory()
 
             withContext(Dispatchers.Main)
             {
-                adapter.setData(decodedpets.users)
+                adapter.setData(decodedpets.loginEntries)
             }
         }
     }

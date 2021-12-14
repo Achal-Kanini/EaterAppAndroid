@@ -10,7 +10,7 @@ import com.squareup.picasso.Picasso
 import retrofit2.Call
 
 class RecyclerAdapter: RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>() {
-    var petList = emptyList<TimeStamps>()
+    var petList = emptyList<User>()
 
     class MyViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
 
@@ -34,7 +34,7 @@ class RecyclerAdapter: RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>() {
         return petList.size
     }
 
-    fun setData(pets: History)
+    fun setData(pets: Users)
     {
         this.petList=pets.users
         notifyDataSetChanged()
