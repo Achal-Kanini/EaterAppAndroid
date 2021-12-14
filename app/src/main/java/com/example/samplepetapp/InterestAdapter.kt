@@ -8,7 +8,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import java.text.SimpleDateFormat
 import java.time.Month
+import java.util.*
 
 class InterestAdapter: RecyclerView.Adapter<InterestAdapter.MyViewHolder>() {
 //    var newpetInterests = emptyList<PetInterestList>()
@@ -28,15 +30,15 @@ class InterestAdapter: RecyclerView.Adapter<InterestAdapter.MyViewHolder>() {
 
 //        holder.itemView.findViewById<TextView>(R.id.petint_name).text= ts[0].loginTimestamp.toString()
         if (position == 0){
-            val sdf = java.text.SimpleDateFormat("dd MMMM yyyy")
-            var membersince = java.util.Date(currentItem.loginTimestamp * 1000)
-            var newdate = sdf.format(membersince)
-            holder.itemView.findViewById<TextView>(R.id.loginhistory).text= "Member since : $newdate"
+            val sdf = SimpleDateFormat("dd-MMM-YYYY")
+            val netDate = Date(currentItem.loginTimestamp)
+            val displayThisDate = sdf.format(netDate)
+            holder.itemView.findViewById<TextView>(R.id.loginhistory).text= "Member since : $displayThisDate"
         }
         else{
-            val sdf = java.text.SimpleDateFormat("dd MMMM yyyy")
-            var loggedin = java.util.Date(currentItem.loginTimestamp * 1000)
-            var newdate = sdf.format(loggedin)
+            val sdf = SimpleDateFormat("dd-MMM-YYYY")
+            val netDate = Date(currentItem.loginTimestamp)
+            val newdate = sdf.format(netDate)
             holder.itemView.findViewById<TextView>(R.id.loginhistory).text= "Logged In : $newdate"
         }
 
