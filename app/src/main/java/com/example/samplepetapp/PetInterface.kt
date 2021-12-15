@@ -36,7 +36,6 @@ interface PetInterface {
     suspend fun getDishes(): Dishes
 
     @Headers(
-        "Content-Type: application/json",
         "Authorization: Bearer 540c0771-11fc-47e1-9c3f-f3824097bb4e"
     )
     @POST("/users/me/orders")

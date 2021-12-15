@@ -25,14 +25,19 @@ class CreateOrder : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_order)
+        val profileName=intent.getStringExtra("name")
+        val profileId=intent.getStringExtra("id")
+        val profileImg=intent.getStringExtra("img")
+        var profilePrice=intent.getStringExtra("price")
+
         val ProgressBar = findViewById<ProgressBar>(R.id.progressBar)
         ProgressBar.setVisibility(View.INVISIBLE)
 
         val dishName = findViewById<TextView>(R.id.dishName)
-        dishName.text = "New Dish"
+        dishName.text = profileName
 
         val dishImage = findViewById<ImageView>(R.id.dishImage)
-        Picasso.get().load("https://media.istockphoto.com/photos/double-bacon-cheeseburger-picture-id117150229?k=20&m=117150229&s=612x612&w=0&h=KVXwdKJRTV1s8KAl9A7C_FOv1QvnMHSmvgRLpShZOTQ=").into(dishImage)
+        Picasso.get().load(profileImg).into(dishImage)
 
 
         val ItemCountView = findViewById<TextView>(R.id.itemCountView)
@@ -51,7 +56,8 @@ class CreateOrder : AppCompatActivity() {
                 CreateOrderBtn.setClickable(true)
             }
             ItemCountView.text = "Item Count = $cnt"
-            var price = cnt*10
+
+            var price = cnt*profilePrice.toString().toInt()
             Price.text = "Item Price = $price"
 
         }
@@ -89,7 +95,7 @@ class CreateOrder : AppCompatActivity() {
 
             // Create JSON using JSONObject
             val jsonObject = JSONObject()
-            jsonObject.put("dishId", orderid)
+            jsonObject.put("dishId", profileId.toString().toInt())
             jsonObject.put("count", cnt)
 
             val jsonObjectString = jsonObject.toString()
@@ -97,6 +103,8 @@ class CreateOrder : AppCompatActivity() {
             // Create RequestBody ( We're not using any converter, like GsonConverter, MoshiConverter e.t.c, that's why we use RequestBody )
             val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
 
+            println("Request body is : $requestBody" )
+            println("Request body is : $jsonObjectString" )
             CoroutineScope(Dispatchers.IO).launch {
                 // Do the POST request and get response
                 val response = service.createOrder(requestBody)
