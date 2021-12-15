@@ -38,7 +38,7 @@ interface PetInterface {
     @Headers(
         "Authorization: Bearer 540c0771-11fc-47e1-9c3f-f3824097bb4e"
     )
-    @POST("/users/me/orders")
+    @POST("users/me/orders")
     suspend fun createOrder(@Body requestBody: RequestBody) : Response<ResponseBody>
 
 }
