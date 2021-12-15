@@ -21,3 +21,17 @@ data class TimeStamp(
 data class History(
     var loginEntries: List<TimeStamp>
 )
+
+data class Dish(
+//    @SerializedName("id")
+    var id:Int = 0,
+    var url: String = "",
+    var name: String = "",
+    var price:Int = 0,
+    var contents: String = "",
+    var type: String = "",
+)
+
+data class Dishes(
+    var dishes: List<Dish>
+)
