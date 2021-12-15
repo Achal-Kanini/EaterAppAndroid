@@ -3,13 +3,10 @@ package com.example.samplepetapp
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
-import retrofit2.Call
 
-class RecyclerAdapter: RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>() {
+class OtherUsersAdapter: RecyclerView.Adapter<OtherUsersAdapter.MyViewHolder>() {
     var petList = emptyList<User>()
 
     class MyViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {

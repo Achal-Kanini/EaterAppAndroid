@@ -1,8 +1,6 @@
 package com.example.samplepetapp
 
 import android.content.Intent
-import android.icu.number.NumberFormatter.with
-import android.icu.number.NumberRangeFormatter.with
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -91,7 +89,7 @@ class CreateOrder : AppCompatActivity() {
                 .build()
 
             // Create Service
-            val service = retrofit.create(PetInterface::class.java)
+            val service = retrofit.create(EaterInterface::class.java)
 
             // Create JSON using JSONObject
             val jsonObject = JSONObject()
@@ -124,7 +122,7 @@ class CreateOrder : AppCompatActivity() {
                         Log.d("Pretty Printed JSON :", prettyJson)
                         Toast.makeText(this@CreateOrder, "Created Successfully", Toast.LENGTH_LONG).show()
 
-                        val loginIntent= Intent(this@CreateOrder,MainActivity::class.java)
+                        val loginIntent= Intent(this@CreateOrder,OtherUsersActivity::class.java)
                         loginIntent.putExtra("message1","This is Home Page")
                         loginIntent.putExtra("message2",prettyJson)
                         this@CreateOrder.startActivity(loginIntent)

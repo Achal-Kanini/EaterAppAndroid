@@ -9,31 +9,32 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class SpecificDishActivity : AppCompatActivity() {
+class LoginHistoryActivity : AppCompatActivity() {
+
     private var layoutManager: RecyclerView.LayoutManager? = null
-    private var adapter: RecyclerView.Adapter<SpecificDishAdapter.MyViewHolder>? = null
+    private var adapter: RecyclerView.Adapter<LoginHistoryAdapter.MyViewHolder>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_specific_dish)
+        setContentView(R.layout.activity_interest)
 
-
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerDish)
+        val recyclerView = findViewById<RecyclerView>(R.id.petInterestView)
         layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        val adapter = SpecificDishAdapter()
+        val adapter = LoginHistoryAdapter()
         recyclerView.adapter = adapter
 
-        val petsApplication = application as PetsApplication
+        val petsApplication = application as EaterApplication
         val petService = petsApplication.pets
 
-        println("decoded result is ***********************************************")
+        val newpets= emptyList<User>()
         CoroutineScope(Dispatchers.IO).launch {
-            val decodeddish = petService.getDishes()
-            println("decoded result is %%%%%%%%%%%%%%%%%*************************")
+//            val decodedpetsInterests = petService.getPetInterests()
+            val decodedpets = petService.getHistory()
+
             withContext(Dispatchers.Main)
             {
-                adapter.setData(decodeddish)
+                adapter.setData(decodedpets.loginEntries)
             }
         }
     }

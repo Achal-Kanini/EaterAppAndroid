@@ -9,7 +9,7 @@ import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.POST
 
-interface PetInterface {
+interface EaterInterface {
     @Headers(
         "Content-Type: application/json",
         "Authorization: Bearer 540c0771-11fc-47e1-9c3f-f3824097bb4e"
@@ -17,7 +17,7 @@ interface PetInterface {
 
     @GET("users")
 //    suspend fun getPets(): Response<PetList>
-    suspend fun getPets(): Users
+    suspend fun getUsers(): Users
 
     @Headers(
         "Content-Type: application/json",

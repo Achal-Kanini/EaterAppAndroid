@@ -7,35 +7,36 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+
 import kotlinx.coroutines.withContext
 
-class InterestActivity : AppCompatActivity() {
+class OtherUsersActivity : AppCompatActivity() {
 
     private var layoutManager: RecyclerView.LayoutManager? = null
-    private var adapter: RecyclerView.Adapter<InterestAdapter.MyViewHolder>? = null
+    private var adapter: RecyclerView.Adapter<OtherUsersAdapter.MyViewHolder>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_interest)
+        setContentView(R.layout.activity_main)
 
-        val recyclerView = findViewById<RecyclerView>(R.id.petInterestView)
+
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        val adapter = InterestAdapter()
+        val adapter = OtherUsersAdapter()
         recyclerView.adapter = adapter
 
-        val petsApplication = application as PetsApplication
+        val petsApplication = application as EaterApplication
         val petService = petsApplication.pets
 
-        val newpets= emptyList<User>()
-        CoroutineScope(Dispatchers.IO).launch {
-//            val decodedpetsInterests = petService.getPetInterests()
-            val decodedpets = petService.getHistory()
-
-            withContext(Dispatchers.Main)
-            {
-                adapter.setData(decodedpets.loginEntries)
+            CoroutineScope(Dispatchers.IO).launch {
+                val decodedpets = petService.getUsers()
+                println("decoded result is :${decodedpets.users[0]}")
+                withContext(Dispatchers.Main)
+                {
+                    adapter.setData(decodedpets)
+                }
             }
-        }
     }
 }
+
